@@ -3,6 +3,7 @@ import './App.css'
 
 function App() {
   const fetchedData = fetcher(`${import.meta.env.VITE_API_URL}api`);
+  //console.log(fetchedData);
 
   if (!fetchedData) {
     return;
