@@ -1,4 +1,5 @@
 import { fetcher } from './components/fetcher'
+import { Outlet } from "react-router";
 import './App.css'
 
 function App() {
@@ -40,6 +41,9 @@ function App() {
               </tbody>
             ))}
           </table>
+        </div>
+        <div>
+          <Outlet />
         </div>
       </section>
     </>
