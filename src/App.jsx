@@ -1,5 +1,7 @@
 import { fetcher } from './components/fetcher'
 import { Outlet } from "react-router";
+/*import { useEffect, useState } from 'react'
+import { io } from 'socket.io-client'*/
 import './App.css'
 
 function App() {
