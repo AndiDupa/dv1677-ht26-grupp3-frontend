@@ -20,6 +20,7 @@ function Test() {
           <h2>Testing</h2><br />
           <div>
             <Updates />
+          </div>
         </div>
       </section>
     </>
