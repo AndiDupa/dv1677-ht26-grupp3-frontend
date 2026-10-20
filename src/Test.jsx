@@ -1,15 +1,21 @@
-//import { fetcher } from './components/fetcher'
+import { fetcher } from './components/fetcher'
 //import { Outlet } from "react-router";
 import './App.css'
 import Updates from './Socket.jsx'
+import { getResources, getResource } from './api/resources.js'
 
 function Test() {
-  //const fetchedData = fetcher(`${import.meta.env.VITE_API_URL}api`);
-  //console.log(fetchedData);
+  const fetchedData = fetcher(`${import.meta.env.VITE_API_URL}api`);
+  console.log("1")
+  console.log(fetchedData);
 
   /*if (!fetchedData) {
     return;
   }*/
+
+  const resources = getResources()
+  console.log("2")
+  console.log(resources)
 
   //const data = fetchedData.resources;
 

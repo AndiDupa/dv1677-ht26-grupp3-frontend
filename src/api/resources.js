@@ -1,7 +1,7 @@
 const API = import.meta.env.VITE_API_URL || 'http://localhost:3000/'
 
 export async function getResources() {
-  const res = await fetch(`${API}api/resources`)
+  const res = await fetch(`${API}api`)
   if (!res.ok) throw new Error('Failed to fetch resources')
   return res.json()
 }
