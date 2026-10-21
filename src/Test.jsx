@@ -1,7 +1,9 @@
 import { fetcher } from './components/fetcher'
+import { useEffect, useState, useCallback } from 'react'
 //import { Outlet } from "react-router";
 import './App.css'
 import Updates from './Socket.jsx'
+import { io } from 'socket.io-client'
 import { getResources, getResource } from './api/resources.js'
 
 function Test() {

@@ -9,7 +9,7 @@ function Updates({ id }) {
 
     socket.emit('join', id)
 
-    socket.on('test:performed', (ny) => setText(ny))
+    socket.on('test', (ny) => setText(ny))
 
     // ⚠️ Utan den här raden öppnas en ny socket varje gång komponenten
     // renderas om, och de gamla stängs aldrig.
