@@ -19,6 +19,12 @@ function Test() {
   console.log("2")
   console.log(resources)
 
+  useSocket(
+    'test:performed', ({  message  }) => {
+      console.log(message)
+    }
+  )
+
   //const data = fetchedData.resources;
 
   return (

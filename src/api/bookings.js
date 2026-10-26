@@ -4,8 +4,8 @@ const API = import.meta.env.VITE_API_URL || 'http://localhost:3000/'
   return { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
 }*/
 
-export async function getBookings(/*token*/) {
-  const res = await fetch(`${API}api/bookings`, { /*headers: authHeader(token)*/ })
+export async function getBookings(id) {
+  const res = await fetch(`${API}api/bookings/${id}`, { /*headers: authHeader(token)*/ })
   if (!res.ok) throw new Error('Failed to fetch bookings')
   return res.json()
 }

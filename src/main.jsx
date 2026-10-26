@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, NavLink, Link } from "react-router";
 import './index.css'
 import App from './App.jsx'
 import Test from './Test.jsx'
+import ResourcesPage from './pages/ResourcesPage.jsx'
 
 const baseURL = "/dv1677-ht26-grupp3-frontend"
 
@@ -14,6 +15,7 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/dv1677-ht26-grupp3-frontend/" element={<App />}>
           <Route path="test" element={<Test />} />
+          <Route path="resources" element={<ResourcesPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
