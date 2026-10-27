@@ -1,8 +1,8 @@
 const API = import.meta.env.VITE_API_URL || 'http://localhost:3000/'
 
-/*function authHeader(token) {
+function authHeader(token) {
   return { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
-}*/
+}
 
 export async function getBookings(id) {
   const res = await fetch(`${API}api/bookings/${id}`, { /*headers: authHeader(token)*/ })
@@ -10,10 +10,10 @@ export async function getBookings(id) {
   return res.json()
 }
 
-export async function createBooking(/*token,*/ resourceId, startsAt, endsAt) {
+export async function createBooking(token, resourceId, startsAt, endsAt) {
   const res = await fetch(`${API}api/bookings`, {
     method: 'POST',
-    //headers: authHeader(token),
+    headers: authHeader(token),
     body: JSON.stringify({ resourceId, startsAt, endsAt }),
   })
   const data = await res.json()
@@ -21,10 +21,10 @@ export async function createBooking(/*token,*/ resourceId, startsAt, endsAt) {
   return data
 }
 
-export async function cancelBooking(/*token,*/ id) {
+export async function cancelBooking(token, id) {
   const res = await fetch(`${API}api/bookings/${id}`, {
     method: 'DELETE',
-    //headers: authHeader(token),
+    headers: authHeader(token),
   })
   if (!res.ok) throw new Error('Failed to cancel booking')
   return res.json()
