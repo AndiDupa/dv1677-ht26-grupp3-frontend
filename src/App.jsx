@@ -44,6 +44,9 @@ export default function App() {
         <Route path="/dv1677-ht26-grupp3-frontend/login" element={<LoginPage />} />
         <Route path="/dv1677-ht26-grupp3-frontend/register" element={<RegisterPage />} />
         <Route path="/dv1677-ht26-grupp3-frontend/test" element={<Test />} />
+        <Route path="/dv1677-ht26-grupp3-frontend/protected/" element={<ProtectedRoute />}>
+          <Route path="test" element={<Test />} />
+        </Route>
         <Route path="*" element={<Navigate to="/dv1677-ht26-grupp3-frontend/" replace />} />
       </Routes>
     </AuthProvider>
