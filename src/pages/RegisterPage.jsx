@@ -1,13 +1,16 @@
 import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router'
 import { register as apiRegister } from '../api/auth.js'
 import { useAuth } from '../context/AuthContext.jsx'
+
+const baseUrl = `${import.meta.env.FRONTEND_URL}dv1677-ht26-grupp3-frontend`
 
 export default function RegisterPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const { login } = useAuth()
+  //const history = useHistory();
   const navigate = useNavigate()
 
   async function handleSubmit(e) {
@@ -16,7 +19,9 @@ export default function RegisterPage() {
     try {
       const data = await apiRegister(email, password)
       login(data.user, data.token)
-      navigate('/')
+      navigate(baseUrl)
+      //window.location.href(baseUrl)
+      //history.push(baseUrl)
     } catch (err) {
       setError(err.message)
     }

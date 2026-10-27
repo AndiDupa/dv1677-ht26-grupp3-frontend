@@ -10,7 +10,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const { login } = useAuth()
-  //const navigate = useNavigate()
+  //const history = useHistory();
+  const navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -18,8 +19,9 @@ export default function LoginPage() {
     try {
       const data = await apiLogin(email, password)
       login(data.user, data.token)
-      //navigate('/')
-      window.location.href(baseUrl)
+      navigate(baseUrl)
+      //window.location.href(baseUrl)
+      //history.push(baseUrl)
     } catch (err) {
       setError(err.message)
     }
