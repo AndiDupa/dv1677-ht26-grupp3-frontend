@@ -5,7 +5,10 @@ function authHeader(token) {
 }
 
 export async function getBookings(id) {
-  const res = await fetch(`${API}api/bookings/${id}`, { /*headers: authHeader(token)*/ })
+  const res = await fetch(`${API}api/bookings/${id}`, { 
+    headers: authHeader(localStorage.getItem('rb_token')),
+    body:  JSON.stringify({ user: localStorage.getItem('rb_user') })
+  })
   if (!res.ok) throw new Error('Failed to fetch bookings')
   return res.json()
 }

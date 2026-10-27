@@ -11,6 +11,8 @@ export function AuthProvider({ children }) {
   function login(userData, jwt) {
     setUser(userData)
     setToken(jwt)
+    //console.log(userData)
+    //console.log(jwt)
     localStorage.setItem('rb_user', JSON.stringify(userData))
     localStorage.setItem('rb_token', jwt)
   }
