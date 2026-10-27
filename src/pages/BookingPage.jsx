@@ -20,12 +20,6 @@ export default function BookingPage() {
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
 
-  const loadAvailability = useCallback(async () => {
-    const s = await getAvailability(id, date)
-    setSlots(s)
-    setSelectedSlot(null)
-  }, [id, date])
-
   const loadMyBookings = useCallback(async () => {
     if (!token) return
     const b = await getBookings(token)
@@ -37,23 +31,8 @@ export default function BookingPage() {
   }, [id])
 
   useEffect(() => {
-    loadAvailability()
     loadMyBookings()
-  }, [loadAvailability, loadMyBookings])
-
-  useSocket({
-    'booking:updated': ({ resourceId, date: updatedDate }) => {
-      if (resourceId === id && updatedDate === date) {
-        loadAvailability()
-        loadMyBookings()
-      }
-    },
-    'comment:added': ({ bookingId, comment }) => {
-      if (selectedBooking && bookingId === selectedBooking._id) {
-        setComments(prev => [...prev, comment])
-      }
-    },
-  })
+  }, [loadMyBookings])
 
   async function handleBook() {
     if (!selectedSlot || !token) return

@@ -4,8 +4,8 @@ import { Outlet, Routes, Route, Link, Navigate, BrowserRouter } from "react-rout
 import { io } from 'socket.io-client'*/
 import Test from './Test.jsx'
 import { AuthProvider, useAuth } from './context/AuthContext.jsx'
-//import ResourcesPage from './pages/ResourcesPage.jsx'
-//import BookingPage from './pages/BookingPage.jsx'
+import ResourcesPage from './pages/ResourcesPage.jsx'
+import BookingPage from './pages/BookingPage.jsx'
 import LoginPage from './pages/LoginPage.jsx'
 import RegisterPage from './pages/RegisterPage.jsx'
 import ProtectedRoute from './utils/protectedRoutes.jsx';
@@ -39,10 +39,11 @@ export default function App() {
     <AuthProvider>
       <Nav />
       <Routes>
-        <Route path="/" element={<Navigate to="/dv1677-ht26-grupp3-frontend/login" replace />} />
-        <Route path="/resources/:id" element={<Navigate to="/dv1677-ht26-grupp3-frontend/login" replace />} />
+        <Route path="/" element={<ResourcesPage />} />
+        <Route path="/resources/:id" element={<BookingPage />} />
         <Route path="/dv1677-ht26-grupp3-frontend/login" element={<LoginPage />} />
         <Route path="/dv1677-ht26-grupp3-frontend/register" element={<RegisterPage />} />
+        <Route path="/dv1677-ht26-grupp3-frontend/test" element={<Test />} />
         <Route path="*" element={<Navigate to="/dv1677-ht26-grupp3-frontend/" replace />} />
       </Routes>
     </AuthProvider>
