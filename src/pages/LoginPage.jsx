@@ -1,14 +1,16 @@
 import { useState } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router'
 import { login as apiLogin } from '../api/auth.js'
 import { useAuth } from '../context/AuthContext.jsx'
+
+const baseUrl = `${import.meta.env.FRONTEND_URL}dv1677-ht26-grupp3-frontend`
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const { login } = useAuth()
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -16,7 +18,8 @@ export default function LoginPage() {
     try {
       const data = await apiLogin(email, password)
       login(data.user, data.token)
-      navigate('/')
+      //navigate('/')
+      window.location.href(baseUrl)
     } catch (err) {
       setError(err.message)
     }

@@ -1,23 +1,18 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Routes, Route, NavLink, Link } from "react-router";
+import { HashRouter, BrowserRouter, Routes, Route, NavLink, Link, Outlet } from "react-router";
 import './index.css'
 import App from './App.jsx'
 import Test from './Test.jsx'
 import ResourcesPage from './pages/ResourcesPage.jsx'
+import ProtectedRoute from './utils/protectedRoutes.jsx';
 
 const baseURL = "/dv1677-ht26-grupp3-frontend"
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/dv1677-ht26-grupp3-frontend/" element={<App />}>
-          <Route path="test" element={<Test />} />
-          <Route path="resources" element={<ResourcesPage />} />
-        </Route>
-      </Routes>
+      <App />
     </BrowserRouter>
   </StrictMode>,
 )

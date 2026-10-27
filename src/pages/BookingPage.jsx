@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
-import { getResource, getAvailability } from '../api/resources.js'
+import { getResource, /*getAvailability*/ } from '../api/resources.js'
 import { createBooking, cancelBooking, getBookings } from '../api/bookings.js'
 //import { getComments, createComment } from '../api/comments.js'
 //import { useAuth } from '../context/AuthContext.jsx'

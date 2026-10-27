@@ -1,55 +1,51 @@
 import { fetcher } from './components/fetcher'
-import { Outlet } from "react-router";
+import { Outlet, Routes, Route, Link, Navigate, BrowserRouter } from "react-router";
 /*import { useEffect, useState } from 'react'
 import { io } from 'socket.io-client'*/
+import Test from './Test.jsx'
+import { AuthProvider, useAuth } from './context/AuthContext.jsx'
+//import ResourcesPage from './pages/ResourcesPage.jsx'
+//import BookingPage from './pages/BookingPage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+import RegisterPage from './pages/RegisterPage.jsx'
+import ProtectedRoute from './utils/protectedRoutes.jsx';
 import './App.css'
 
-function App() {
-  const fetchedData = fetcher(`${import.meta.env.VITE_API_URL}api`);
-  //console.log(fetchedData);
+const baseURL = "/dv1677-ht26-grupp3-frontend"
 
-  if (!fetchedData) {
-    return;
-  }
-
-  const data = fetchedData.resources;
-
+function Nav() {
+  const { user, logout } = useAuth()
   return (
-    <>
-      <section className="center max-height">
-        <div className="content">
-          <h2>Fetched data from the backend server "/api" route</h2><br />
-          <table className="table max-width">
-            <thead>
-              <tr>
-                <th>_id</th>
-                <th>type</th>
-                <th>name</th>
-                <th>description</th>
-                <th>capacity</th>
-              </tr>
-            </thead>
-
-
-            {data.map((item, index) => (
-              <tbody key={item._id}>
-                <tr>
-                  <td>{item._id}</td>
-                  <td>{item.type}</td>
-                  <td>{item.name}</td>
-                  <td>{item.description}</td>
-                  <td>{item.capacity}</td>
-                </tr>
-              </tbody>
-            ))}
-          </table>
-        </div>
-        <div>
-          <Outlet />
-        </div>
-      </section>
-    </>
+    <nav>
+      <Link to="/dv1677-ht26-grupp3-frontend/" className="brand">Resource Booking</Link>
+      <Link to="/dv1677-ht26-grupp3-frontend/">Resurser</Link>
+      {user ? (
+        <>
+          <span style={{ color: '#94a3b8', fontSize: '0.85rem' }}>{user.email}</span>
+          <button className="secondary" style={{ padding: '0.3rem 0.7rem' }} onClick={logout}>Logga ut</button>
+        </>
+      ) : (
+        <>
+          <Link to="/dv1677-ht26-grupp3-frontend/login">Logga in</Link>
+          <Link to="/dv1677-ht26-grupp3-frontend/register">Registrera</Link>
+        </>
+      )}
+    </nav>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <AuthProvider>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Navigate to="/dv1677-ht26-grupp3-frontend/login" replace />} />
+        <Route path="/resources/:id" element={<Navigate to="/dv1677-ht26-grupp3-frontend/login" replace />} />
+        <Route path="/dv1677-ht26-grupp3-frontend/login" element={<LoginPage />} />
+        <Route path="/dv1677-ht26-grupp3-frontend/register" element={<RegisterPage />} />
+        <Route path="*" element={<Navigate to="/dv1677-ht26-grupp3-frontend/" replace />} />
+      </Routes>
+    </AuthProvider>
+  )
+}
+
