@@ -41,20 +41,7 @@ function Test() {
         <div className="content">
           <h2>Testing</h2><br />
           <div>
-            {myBookings.length > 0 && (
-              <div className="card">
-                <h2>Dina bokningar för denna resurs</h2>
-                {myBookings.filter(b => b.status === 'confirmed').map(b => (
-                  <div key={b._id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                    <span style={{ fontSize: '0.9rem' }}>
-                      {new Date(b.startsAt).toLocaleDateString('sv')} {new Date(b.startsAt).getUTCHours()}:00–{new Date(b.endsAt).getUTCHours()}:00
-                    </span>
-                    <button className="secondary" style={{ padding: '0.2rem 0.6rem' }} onClick={() => selectBooking(b)}>Kommentarer</button>
-                    <button className="danger" style={{ padding: '0.2rem 0.6rem' }} onClick={() => handleCancel(b._id)}>Avboka</button>
-                  </div>
-                ))}
-              </div>
-            )}
+            <h1>TEST</h1>
           </div>
         </div>
       </section>
