@@ -1,7 +1,19 @@
 const API = import.meta.env.VITE_API_URL || 'http://localhost:3000/'
 
 export async function getResources() {
-  const res = await fetch(`${API}api`)
+  const res = await fetch(`${API}api/resources/all`)
+  if (!res.ok) throw new Error('Failed to fetch resources')
+  return res.json()
+}
+
+export async function getUserBookings(user) {
+  const res = await fetch(`${API}api/booking/${user}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${localStorage.getItem("rb_token")}`
+    }
+  })
   if (!res.ok) throw new Error('Failed to fetch resources')
   return res.json()
 }
