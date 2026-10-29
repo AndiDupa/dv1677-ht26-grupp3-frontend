@@ -41,6 +41,8 @@ npm start
   * https://dv1677-worf.nplab.bth.se/api
 * Miljövariabel VITE_API_URL dokumenterad
   * VITE_API_URL=https://dv1677-worf.nplab.bth.se/
+* Miljövariabel FRONTEND_URL
+  * FRONTEND_URL=<url som frontend har>
 * Instruktioner för att köra projektet lokalt
   * Skapa en .env fil med miljövariabeln: VITE_API_URL=https://dv1677-worf.nplab.bth.se/
   * Kör: npm install
