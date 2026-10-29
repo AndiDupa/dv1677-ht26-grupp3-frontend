@@ -12,7 +12,9 @@ const baseURL = "/dv1677-ht26-grupp3-frontend"
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <section className="grid max-height">
+        <App />
+      </section>
     </BrowserRouter>
   </StrictMode>,
 )
