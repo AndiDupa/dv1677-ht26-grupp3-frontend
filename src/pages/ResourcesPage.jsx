@@ -11,21 +11,23 @@ export default function ResourcesPage() {
   }, [])
 
   return (
-    <div className="container">
-      <h1>Tillgängliga resurser</h1>
-      {error && <p className="error">{error}</p>}
-      {resources.map(r => (
-        <Link to={`/resources/${r._id}`} key={r._id}>
-          <div className="card" style={{ cursor: 'pointer' }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <strong>{r.name}</strong>
-              <span className={`badge ${r.type}`}>{r.type}</span>
+    <div className="content">
+      <div className="container">
+        <h1>Tillgängliga resurser</h1>
+        {error && <p className="error">{error}</p>}
+        {resources.map(r => (
+          <Link to={`/resources/${r._id}`} key={r._id}>
+            <div className="card" style={{ cursor: 'pointer' }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <strong>{r.name}</strong>
+                <span className={`badge ${r.type}`}>{r.type}</span>
+              </div>
+              {r.description && <p style={{ marginTop: '0.5rem', color: '#64748b', fontSize: '0.9rem' }}>{r.description}</p>}
             </div>
-            {r.description && <p style={{ marginTop: '0.5rem', color: '#64748b', fontSize: '0.9rem' }}>{r.description}</p>}
-          </div>
-        </Link>
-      ))}
-      {resources.length === 0 && !error && <p style={{ color: '#64748b' }}>Inga resurser hittades.</p>}
+          </Link>
+        ))}
+        {resources.length === 0 && !error && <p style={{ color: '#64748b' }}>Inga resurser hittades.</p>}
+      </div>
     </div>
   )
 }
