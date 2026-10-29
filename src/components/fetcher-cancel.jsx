@@ -2,7 +2,6 @@ import { useState } from "react";
 
 function FormPostCancel() {
   const [secret, setSecret] = useState("");
-  const [username, setUser] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +19,8 @@ function FormPostCancel() {
       const res = await fetch("https://dv1677-worf.nplab.bth.se/api/test/broker/cancel", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("rb_token")}`
         },
         body: JSON.stringify(data)
       });
@@ -33,7 +33,7 @@ function FormPostCancel() {
         
         setResData(JSON.stringify(result, null, 2));
       } else {
-        console.log("Error: Request was not accepted");
+        console.log("Error: Request was not accepted. Are you logged in?");
       }
     } catch (e) {
       console.error(e);

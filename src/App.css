@@ -20,6 +20,10 @@
   margin-left: 1em;
 }
 
+.margin-right {
+  margin-right: 1em;
+}
+
 .margin-bottom {
   margin-bottom: 1em;
   display: flex;
@@ -81,20 +85,60 @@ td {
   background-color: #3f5c58;
   grid-row: 3;
   grid-column: span 3;
-  align-content: center;
+  display: flex;
+  place-items: center;
+  place-content: space-between;
 }
 
 .grid {
   display: grid;
   min-height: 100vh;
   grid-template-columns: 1fr 5fr 1fr;
-  grid-template-rows: 5em 5fr 5em;
+  grid-template-rows: 5em 5fr 7em;
   row-gap: 1em;
+}
+
+.even-grid {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1em;
+}
+
+.card {
+  background-color: #56706d;
+  color: #b6b09d;
+  border-radius: 1em;
+  transition: 0.4s ease;
+}
+
+.card:hover {
+  background-color: #3f5c58;
 }
 
 .nav {
   display: flex;
   place-content: space-evenly;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.gap {
+  gap: 1em;
+}
+
+.booking {
+  text-align: left;
+  padding: 1em;
+}
+
+.two-column {
+  grid-template-columns: 50% 50% !important;
 }
 
 .link {

@@ -2,10 +2,10 @@ import { useState } from "react";
 
 function FormPostMaas() {
   const [resource_Id, setResourceId] = useState("");
-  const [username, setUser] = useState("");
   const [starts_At, setStartsAt] = useState("");
   const [ends_At, setEndsAt] = useState("");
   const [loading, setLoading] = useState(false);
+  const user = localStorage.getItem("rb_user").slice(1,-1);
 
   const [resData, setResData] = useState("");
 
@@ -15,7 +15,7 @@ function FormPostMaas() {
 
     const data = {
       resourceId: resource_Id,
-      user: username,
+      user: user,
       startsAt: new Date(starts_At),
       endsAt: new Date(ends_At)
     };
@@ -24,7 +24,8 @@ function FormPostMaas() {
       const res = await fetch("https://dv1677-worf.nplab.bth.se/api/test/broker/book", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("rb_token")}`
         },
         body: JSON.stringify(data)
       });
@@ -34,13 +35,12 @@ function FormPostMaas() {
         console.log(result);
 
         setResourceId("");
-        setUser("");
         setStartsAt("");
         setEndsAt("");
         
         setResData(JSON.stringify(result, null, 2));
       } else {
-        console.log("Error: Request was not accepted");
+        console.log("Error: Request was not accepted. Are you logged in?");
       }
     } catch (e) {
       console.error(e);
@@ -55,10 +55,6 @@ function FormPostMaas() {
         <p className='form-right'>
           <label>Resource Id:</label>
           <input type="text" id="resourceId" name="resourceId" value={resource_Id} onChange={(e) => setResourceId(e.target.value)} />
-        </p>
-        <p className='form-right'>
-          <label>Username:</label>
-          <input type="text" id="user" name="user" value={username} onChange={(e) => setUser(e.target.value)} />
         </p>
         <p className='form-right'>
           <label>Starts at:</label>
