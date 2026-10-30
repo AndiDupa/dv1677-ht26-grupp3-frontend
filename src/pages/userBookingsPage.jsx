@@ -5,8 +5,43 @@ import { getUserBookings } from '../api/resources.js'
 export default function UserBookingsPage() {
   const [bookings, setBookings] = useState([])
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false);
+
   const user = JSON.parse(localStorage.getItem("rb_user"));
   console.log("user: ", user);
+
+  const deleteHandler = async (e, secret) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const data = {
+      secret: secret,
+      user: user
+    };
+
+    try {
+      const res = await fetch("https://dv1677-worf.nplab.bth.se/api/test/broker/cancel", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${localStorage.getItem("rb_token")}`
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (res.ok) {
+        const result = await res.json();
+        console.log(result);
+        location.reload();
+      } else {
+        console.log("Error: Request was not accepted. Are you logged in?");
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
     getUserBookings(user).then(setBookings).catch(err => setError(err.message))
@@ -35,6 +70,11 @@ export default function UserBookingsPage() {
                   <small className='flex-column'><b>{key}:</b> {value}</small>
                 ))}
               </div>
+              <form className='grid-form' onSubmit={(e) => deleteHandler(e, r._id)}>
+                <p className='form-right'>
+                  <input type="submit" value="cancel" className='link margin-top max-width' />
+                </p>
+              </form>
             {/* </Link> */}
             </div>
           ))}
