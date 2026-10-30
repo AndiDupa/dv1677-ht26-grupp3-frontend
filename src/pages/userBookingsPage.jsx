@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router'
+import { useNavigate, Link } from 'react-router'
 import { getUserBookings } from '../api/resources.js'
+
+const baseUrl = `${import.meta.env.FRONTEND_URL}dv1677-ht26-grupp3-frontend`;
 
 export default function UserBookingsPage() {
   const [bookings, setBookings] = useState([])
@@ -8,6 +10,8 @@ export default function UserBookingsPage() {
   const [loading, setLoading] = useState(false);
 
   const user = JSON.parse(localStorage.getItem("rb_user"));
+  const navigate = useNavigate();
+
   console.log("user: ", user);
 
   const deleteHandler = async (e, secret) => {
@@ -32,7 +36,7 @@ export default function UserBookingsPage() {
       if (res.ok) {
         const result = await res.json();
         console.log(result);
-        location.reload();
+        navigate(baseUrl);
       } else {
         console.log("Error: Request was not accepted. Are you logged in?");
       }
