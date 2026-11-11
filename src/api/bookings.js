@@ -1,0 +1,34 @@
+const API = import.meta.env.VITE_API_URL || 'http://localhost:3000/'
+
+function authHeader(token) {
+  return { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
+}
+
+export async function getBookings(id, user) {
+  const res = await fetch(`${API}api/bookings/${id}/${user}`, { 
+    headers: authHeader(localStorage.getItem('rb_token')),
+  })
+  if (!res.ok) throw new Error('Failed to fetch bookings')
+  return res.json()
+}
+
+export async function createBooking(token, resourceId, startsAt, endsAt) {
+  const res = await fetch(`${API}api/bookings`, {
+    method: 'POST',
+    headers: authHeader(token),
+    body: JSON.stringify({ resource_id: resourceId, start_time: startsAt, end_time: endsAt, user: localStorage.getItem('rb_user') }),
+  })
+  const data = await res.json()
+  if (!res.ok) throw new Error(data.error || 'Booking failed')
+  return data
+}
+
+export async function cancelBooking(token, id) {
+  const res = await fetch(`${API}api/bookings/${id}`, {
+    method: 'DELETE',
+    headers: authHeader(token),
+    body:  JSON.stringify({ user: localStorage.getItem('rb_user') }),
+  })
+  if (!res.ok) throw new Error('Failed to cancel booking')
+  return res.json()
+}
